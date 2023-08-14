@@ -36,6 +36,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         // console.log(readDataJson)
 
         if (!readDataJson.document.email) {
+          console.log("SHOULD HAVE USER: ", user)
           await fetch(`${baseUrl}/updateOne`, {
             method: "POST",
             headers: {
