@@ -13,6 +13,7 @@ export default withApiAuthRequired(async function handler(req, res) {
 
     console.log("REQUEST: ", req.method);
     console.log("baseURL: ", baseUrl);
+    console.log("USER: ", user)
     
     switch (req.method) {
       case "GET":
