@@ -11,6 +11,9 @@ export default withApiAuthRequired(async function handler(req, res) {
 
     const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
 
+    console.log("REQUEST: ", req.method);
+    console.log("baseURL: ", baseUrl);
+    
     switch (req.method) {
       case "GET":
         await new Promise((resolve) => setTimeout(resolve, 2000));
