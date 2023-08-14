@@ -13,7 +13,8 @@ export default withApiAuthRequired(async function handler(req, res) {
 
     console.log("REQUEST: ", req.method);
     console.log("baseURL: ", baseUrl);
-    console.log("USER: ", user)
+    console.log("USER: ", user);
+    console.log("YOTEJN: ", accessToken);
     
     switch (req.method) {
       case "GET":
@@ -31,7 +32,7 @@ export default withApiAuthRequired(async function handler(req, res) {
             collection: "users",
           }),
         });
-
+        console.log("PRE_JSON: ", readData);
         const readDataJson = await readData.json();
         console.log("READ: ", readDataJson)
 
