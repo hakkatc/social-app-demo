@@ -33,7 +33,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         });
 
         const readDataJson = await readData.json();
-        // console.log(readDataJson)
+        console.log("READ: ", readDataJson)
 
         if (!readDataJson.document.email) {
           console.log("SHOULD HAVE USER: ", user)
