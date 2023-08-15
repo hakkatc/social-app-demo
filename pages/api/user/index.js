@@ -11,6 +11,11 @@ export default withApiAuthRequired(async function handler(req, res) {
 
     const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
 
+    console.log("REQUEST: ", req.method);
+    console.log("baseURL: ", baseUrl);
+    console.log("USER: ", user);
+    console.log("YOTEJN: ", accessToken);
+    
     switch (req.method) {
       case "GET":
         await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -19,7 +24,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Headers": "*",
-            jwtTokenString: accessToken,
+            "api-key": process.env.MONGODB_DATA_API_KEY,
           },
           body: JSON.stringify({
             dataSource: process.env.MONGODB_DATA_SOURCE,
@@ -27,17 +32,18 @@ export default withApiAuthRequired(async function handler(req, res) {
             collection: "users",
           }),
         });
-
+        console.log("PRE_JSON: ", readData);
         const readDataJson = await readData.json();
-        // console.log(readDataJson)
+        console.log("READ: ", readDataJson)
 
         if (!readDataJson.document.email) {
+          console.log("SHOULD HAVE USER: ", user)
           await fetch(`${baseUrl}/updateOne`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               "Access-Control-Request-Headers": "*",
-              jwtTokenString: accessToken,
+              "api-key": process.env.MONGODB_DATA_API_KEY,
             },
             body: JSON.stringify({
               dataSource: process.env.MONGODB_DATA_SOURCE,
@@ -71,7 +77,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Headers": "*",
-            jwtTokenString: accessToken,
+            "api-key": process.env.MONGODB_DATA_API_KEY,
           },
           body: JSON.stringify({
             dataSource: process.env.MONGODB_DATA_SOURCE,

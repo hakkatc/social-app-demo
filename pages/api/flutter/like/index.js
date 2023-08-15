@@ -7,7 +7,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Request-Headers": "*",
-      jwtTokenString: accessToken,
+      "api-key": process.env.MONGODB_DATA_API_KEY,
     },
   };
   const fetchBody = {
